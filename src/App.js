@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Route, Link, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './login'
 
@@ -6,13 +6,15 @@ function App()
 {
   return (
     <div className="App">
-
-      <div class="header">
+      
+      <div className="header">
         <h1>Título da página</h1>
 
         <div> {/* registo/início de sessão */}
-          <Link to={Login}><button class="login">Entrar</button></Link>
-          <button class="login">Registar-se</button>
+          <Link to="/login">
+            <button className="login">Entrar</button>
+          </Link>
+          <button className="login">Registar-se</button>
         </div>
 
       </div>
@@ -28,6 +30,10 @@ function App()
       </div>
 
       <h2>Encomendas</h2>
+
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
 
     </div>
   );
