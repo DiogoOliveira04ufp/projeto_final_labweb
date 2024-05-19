@@ -1,0 +1,15 @@
+.products_page
+{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+.panel
+{
+    width: 50%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #F0ECEC;
+}

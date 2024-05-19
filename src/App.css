@@ -5,7 +5,6 @@ body
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
-
 .header
 {
     height: 10%;
@@ -15,18 +14,26 @@ body
     justify-content: space-between;
     align-items: center;
 }
-
 .header div
 {
     display: flex;
+}
+
+#page_title
+{
+    text-decoration: none;
+}
+#page_title:visited
+{
+    text-decoration: none;
+    color: black;
 }
 
 .login-container
 {
     display: flex;
 }
-
-.loginbox
+.login
 {
     display: flex;
     height: 32px;
@@ -42,7 +49,6 @@ body
     flex-shrink: 0;
     cursor: pointer;
 }
-
 .login:hover
 {
     border-color: white;
