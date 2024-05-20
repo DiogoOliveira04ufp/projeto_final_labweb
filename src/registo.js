@@ -3,16 +3,19 @@ import './registo.css';
 
 function Registo()
 {
-    const myHeaders = new Headers();
+    /* const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
-    myHeaders.append("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluX3VzZXIiLCJhZG1pbiI6InRydWUiLCJpYXQiOjE3MTYwNTg0NDgsImV4cCI6MTcxNjA2MjA0OH0.CEKc_cqDycDzQY15KdmWjkkMTH4Afqod7PPEUhX4mSY");
+    myHeaders.append("Authorization", "wkakjbadue4.t3gfddvdsgh46.y45j5yrhedtg"); */
 
     const [username, setUsername] = useState("");
     const [full_name, setFull_name] = useState("");
     const [email, setEmail] = useState("");
     const [phone_number, setPhone] = useState("");
+    const [address, setAddress] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const is_admin = false;
+    // const [is_admin, setIsAdmin] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -28,14 +31,20 @@ function Registo()
         {
             const response = await fetch('https://lwlc-proj-2024.onrender.com/users', {
                 method: 'POST',
-                headers: myHeaders,
-                authorization: 'wkakjbadue4.t3gfddvdsgh46.y45j5yrhedtg',
-                body: JSON.stringify({ username, email, password })
+                headers: { 
+                    accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, full_name, email, phone_number, address, password, is_admin })
             });
 
             if(!response.ok)
             {
                 throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            else
+            {
+                alert("Registo efetuado com sucesso");
             }
 
             const data = await response.json();
@@ -68,11 +77,17 @@ function Registo()
                         <input type="number" id="phone" name="phone" placeholder='Telefone' required value={phone_number} onChange={e => setPhone(e.target.value)} /> 
                     </div>
                     <div>
-                        <input type="password" id="password" name="password" placeholder='Password' required value={password} onChange={e => setPassword(e.target.value)} />
+                        <input type="text" id="address" name="address" placeholder='Morada' required value={address} onChange={e => setAddress(e.target.value)} />
                     </div>
                     <div>
-                        <input type="password" id="password" name="password" placeholder='Confirmar Password' required value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                        <input type="password" className="password" name="password" placeholder='Password' required value={password} onChange={e => setPassword(e.target.value)} />
                     </div>
+                    <div>
+                        <input type="password" className="password" name="password" placeholder='Confirmar Password' required value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                    </div>
+                    {/* <div>
+                        <input type="checkbox" id="admin" name="admin" value={is_admin} onChange={e => setIsAdmin(e.target.checked)} />
+                    </div> */}
                     <button type="submit" className='confirm'>Registar</button>
                 </form>
             </div>

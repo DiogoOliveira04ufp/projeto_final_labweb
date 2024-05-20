@@ -1,12 +1,30 @@
-import React from 'react';
-import { Route, Link, Routes } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Link, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Login from './login'
+import { LoginContext } from './logincontext'
 import Registo from './registo'
 import Produtos from './produtos'
 
 function App() 
 {
+  const { setIsLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn } = useContext(LoginContext);
+  const navigate = useNavigate();
+
+  console.log(isLoggedIn);
+
+  const handleLogout = () => {
+    // Remover o token do localStorage
+    localStorage.removeItem('token');
+  
+    // Atualizar o estado de login
+    setIsLoggedIn(false);
+  
+    // Redirecionar o usuário para a página de login ou home
+    navigate('/login');
+  };
+
   return (
     <div className="App">
       
@@ -15,6 +33,9 @@ function App()
           <h1>Título da página</h1>
         </Link>
 
+        {isLoggedIn ? (
+          <button className="login" onClick={handleLogout}>Logout</button>
+        ) : (
         <div> {/* registo/início de sessão */}
           <Link to="/login" reloadDocuments>
             <button className="login">Entrar</button>
@@ -23,6 +44,7 @@ function App()
             <button className="login">Registar-se</button>
           </Link>
         </div>
+        )}
 
       </div>
 
