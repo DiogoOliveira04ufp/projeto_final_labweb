@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './registo.css';
 
 function Registo()
@@ -6,6 +7,8 @@ function Registo()
     /* const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
     myHeaders.append("Authorization", "wkakjbadue4.t3gfddvdsgh46.y45j5yrhedtg"); */
+
+    const Navigate = useNavigate();
 
     const [username, setUsername] = useState("");
     const [full_name, setFull_name] = useState("");
@@ -45,12 +48,15 @@ function Registo()
             else
             {
                 alert("Registo efetuado com sucesso");
+                Navigate("/login")
             }
 
             const data = await response.json();
 
+            /* 
             console.log(data);
-            console.log(response);
+            console.log(response); 
+            */
         }
         catch (error)
         {

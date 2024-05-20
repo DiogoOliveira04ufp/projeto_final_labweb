@@ -4,6 +4,7 @@ import './App.css';
 import Login from './login'
 import { LoginContext } from './logincontext'
 import Registo from './registo'
+import Utilizadores from './utilizadores'
 import Produtos from './produtos'
 
 function App() 
@@ -12,16 +13,11 @@ function App()
   const { isLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  console.log(isLoggedIn);
+  console.log("Tem sessão iniciada: ", isLoggedIn);
 
   const handleLogout = () => {
-    // Remover o token do localStorage
     localStorage.removeItem('token');
-  
-    // Atualizar o estado de login
     setIsLoggedIn(false);
-  
-    // Redirecionar o usuário para a página de login ou home
     navigate('/login');
   };
 
@@ -34,7 +30,9 @@ function App()
         </Link>
 
         {isLoggedIn ? (
-          <button className="login" onClick={handleLogout}>Logout</button>
+          <>
+            <button className="login" onClick={handleLogout}>Logout</button>
+          </>
         ) : (
         <div> {/* registo/início de sessão */}
           <Link to="/login" reloadDocuments>
@@ -52,7 +50,7 @@ function App()
         <Route path="/" element={
           <>
             <div>
-              <h2>Lista de utilizadores</h2>
+              <Link to="/utilizadores"><h2>Lista de utilizadores</h2></Link>
               <p>Todos os utilizadores registados na plataforma</p>
             </div>
 
@@ -68,6 +66,7 @@ function App()
         } />
         <Route path="/login" element={<Login />} />
         <Route path="/registo" element={<Registo />} />
+        <Route path="/utilizadores" element={<Utilizadores />} />
         <Route path="/produtos" element={<Produtos />} />
       </Routes>
 

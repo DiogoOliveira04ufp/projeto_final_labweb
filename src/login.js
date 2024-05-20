@@ -37,10 +37,11 @@ function Login()
         
             const data = await response.json();
 
-            localStorage.setItem('token', data.token);
-        
-            console.log(data);
-            console.log(response);
+            localStorage.setItem('token', data);
+            
+            /* console.log('Token armazenado:', localStorage.getItem('token'));
+            console.log('Resposta: ', data);
+            console.log(response);  */
         }
 
     return (
